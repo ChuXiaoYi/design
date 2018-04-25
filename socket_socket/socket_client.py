@@ -1,5 +1,3 @@
-# -*-coding=utf-8-*-
-# !/usr/bin/python
 from socket import *
 
 '''配置信息'''
@@ -13,8 +11,8 @@ client_socket = socket(AF_INET, SOCK_STREAM)
 client_socket.connect(('127.0.0.1', 8815))
 
 while True:
-    data = raw_input("输入：")
-    client_socket.sendall(data)
+    data = input("输入：")
+    client_socket.sendall(data.encode('utf8'))
     rsv_data = client_socket.recv(BUFSIZE)
-    print rsv_data
+    print(rsv_data.decode('utf8'))
 client_socket.close()
