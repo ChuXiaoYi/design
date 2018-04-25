@@ -1,12 +1,13 @@
 import pika
 import time
-
+from socket_socket.socket_server import Socket_Server
 
 class SocketRabbit(object):
     def __init__(self, host_name):
         self.host = host_name
         self.util_data = dict()  # 用于存储当前对象内的所有工具字段
         self.connect_rabbit()
+        self.ss = Socket_Server()
 
     def connect_rabbit(self):
         """
@@ -27,12 +28,13 @@ class SocketRabbit(object):
         result = self.util_data['channel'].queue_declare(exclusive=True)  # exclusive:当与消费者断开连接的时候，这个队列应当被立即删除
         callback_queue = result.method.queue
         correlation_id = str(int(time.time() * 1000))
+        data = self.ss.request_rabbit()
         self.util_data['channel'].basic_publish(exchange='',
                                                 routing_key='rpc_queue',
                                                 properties=pika.BasicProperties(
                                                     reply_to=callback_queue,
                                                     correlation_id=correlation_id),
-                                                body=str(1))
+                                                body=data)
         self.util_data['callback_queue'] = callback_queue  # 工具字段——callback_queue——回调队列
         self.util_data['correlation_id'] = correlation_id  # 工具字段——correlation_id——用于和返回的correlation_id比较
         self.socket_cusuming()

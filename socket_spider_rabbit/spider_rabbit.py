@@ -38,16 +38,15 @@ class SpiderRabbit(object):
         :return:
         """
         ch.basic_ack(delivery_tag=method.delivery_tag)  # 消费者会通过一个ack（响应），告诉RabbitMQ已经收到并处理了某条消息，然后RabbitMQ就会释放并删除这条消息
-        print(body.decode('utf8'))
         ch.basic_publish(
             exchange='',
             routing_key=props.reply_to,
             properties=pika.BasicProperties(
                 correlation_id=props.correlation_id
             ),
-            body="我是处理过的{body}".format(body=body.encode('utf8'))
+            body="我是处理过的{body}".format(body=body)
         )
-
+        print(body.decode('utf8'))
 
 if __name__ == '__main__':
     host = 'localhost'

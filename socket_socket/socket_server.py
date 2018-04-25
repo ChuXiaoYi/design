@@ -1,33 +1,52 @@
 from socket import *
 import sys
 
-'''配置信息'''
-HOST = '127.0.0.1'
-PORT = 8815
-BUFSIZE = 65535
-ADDR = (HOST, PORT)
 
-'''创建socket，绑定端口并监听'''
-try:
-    server_socket = socket(AF_INET, SOCK_STREAM)
-except error as msg:
-    print("Creating Socket Failure.Error Code: " + str(msg[0]) + "Message: " + str(msg[1]))
-    sys.exit()
-server_socket.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)  # 设置地址服用
-try:
-    server_socket.bind(ADDR)
-except error as msg:
-    print("Binding Failure.Error Code: " + str(msg[0]) + "Message: " + msg[1])
-server_socket.listen(5)
+class Socket_Server(object):
+    def __init__(self):
+        self.HOST = '127.0.0.1'
+        self.PORT = 8815
+        self.BUFSIZE = 65535
+        self.ADDR = (self.HOST, self.PORT)
+        self.server_socket = None
+        self.listen()
 
-while True:
-    '''获取客户端和地址'''
-    client_server, address = server_socket.accept()
-    print("Connected by", address)
-    while True:
-        data = client_server.recv(BUFSIZE)
-        print(data.decode('utf8'))
-        # This calls send() repeatedly until all data is sent.
-        # If an error occurs,it's impossible to tell how much data has been sent.
-        client_server.sendall("我收到了！".encode('utf8'))
-server_socket.close()
+    def listen(self):
+        """
+        创建socket，绑定端口并监听
+        :return:
+        """
+        try:
+            self.server_socket = socket(AF_INET, SOCK_STREAM)
+        except error as msg:
+            print("Creating Socket Failure.Error Code: " + str(msg[0]) + "Message: " + str(msg[1]))
+            sys.exit()
+        self.server_socket.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)  # 设置地址服用
+        try:
+            self.server_socket.bind(self.ADDR)
+        except error as msg:
+            print("Binding Failure.Error Code: " + str(msg[0]) + "Message: " + msg[1])
+        self.server_socket.listen(5)
+
+    def request_rabbit(self):
+        """
+        用于将处理后的客户端数据放到消息队列中
+        :return:
+        """
+        client_server, address = self.server_socket.accept()
+        print("Connected by", address)
+        data = client_server.recv(self.BUFSIZE)
+        client_server.sendall("我收到了！".encode('utf8'))  # 封装了send(),重复send；如果出现异常，会返回已发送的数据
+        return data
+
+    def response_rabbit(self):
+        """
+        用于将消息队列返回的信息发给客户端
+        :return:
+        """
+        pass
+
+
+if __name__ == '__main__':
+    s = Socket_Server()
+    s.request_rabbit()
