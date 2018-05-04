@@ -1,4 +1,4 @@
-## 毕业设计
+说明文档
 # socket_spider_rabbit包
     作为socket和spider的中间件
     -socket_rabbit：
