@@ -8,12 +8,13 @@ from socket_spider_rabbit.socket_rabbit import SocketRabbit
 class Socket_Server(object):
     def __init__(self):
         self.HOST = '127.0.0.1'
-        self.PORT = 8815
+        self.PORT = 8888
         self.BUFSIZE = 65535
         # ip地址和端口号
         self.server_address = (self.HOST, self.PORT)
         self.server_socket = None
         self.listen()
+        self.socket_rabbit = SocketRabbit()
         # self.
     def listen(self):
         """
@@ -97,10 +98,11 @@ class Socket_Server(object):
                 try:
                     # 如果消息队列中有消息，从消息队列中取出要发送的消息
                     message = self.message_queue.get(s)
-                    send_data = ''
+                    response = ''
                     if message is not None:
                         send_data = message.get_nowait()
-                        print(send_data)
+                        response = self.socket_rabbit.socket_publish(send_data)
+                        print(response)
                 except Exception as e:
                     # 客户端连接断开了
                     print("queue为空断开了连接", s.getpeername())
@@ -108,7 +110,7 @@ class Socket_Server(object):
                 else:
                     if message is not None:
                         print("已回复")
-                        s.sendall("我是处理过的".encode('utf8') + send_data)
+                        s.sendall(response)
                     else:
                         print("客户端已关闭")
             # 处理异常情况

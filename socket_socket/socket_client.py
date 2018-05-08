@@ -1,7 +1,7 @@
 import socket
 import time
 messages = ["a", "b", "c"]
-server_address = ('127.0.0.1', 8815)
+server_address = ('127.0.0.1', 8888)
 client_sockets = [
     socket.socket(socket.AF_INET, socket.SOCK_STREAM),
     socket.socket(socket.AF_INET, socket.SOCK_STREAM),
