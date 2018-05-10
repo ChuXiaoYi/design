@@ -27,6 +27,7 @@ class SocketRabbit(object):
         :param data:
         :return:
         """
+        print(data)
         self.response = None
         self.corr_id = str(int(time.time()*1000))
         self.channel.basic_publish(
@@ -36,7 +37,7 @@ class SocketRabbit(object):
                 reply_to=self.callback_queue,
                 correlation_id=self.corr_id
             ),
-            body=str(data)
+            body=data
         )
         print("start waiting for cmd result......")
         count = 0
