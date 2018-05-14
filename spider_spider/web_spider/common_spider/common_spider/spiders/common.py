@@ -10,6 +10,7 @@ class CommonSpider(scrapy.Spider):
 
     def __init__(self, target="1-www.baidu.com"):
         super(CommonSpider, self).__init__(target=target)
+        # 爬取深度
         self.deep_num = target.split("-")[0]
         self.start_urls = [target.split("-")[1]]
         self.allowed_domains = [target.split("-")[1].split(".", 1)[1].split('/')[0]]

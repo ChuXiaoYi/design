@@ -14,6 +14,11 @@ BOT_NAME = 'common_spider'
 SPIDER_MODULES = ['common_spider.spiders']
 NEWSPIDER_MODULE = 'common_spider.spiders'
 
+# 日志
+LOG_FILE = "mySpider.log"
+LOG_LEVEL = "DEBUG"
+LOG_STDOUT = "True"
+
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'common_spider (+http://www.yourdomain.com)'
