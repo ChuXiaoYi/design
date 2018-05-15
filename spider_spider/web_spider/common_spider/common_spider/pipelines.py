@@ -11,10 +11,12 @@ class CommonSpiderPipeline(object):
         self.result_list = list()
 
     def process_item(self, item, spider):
-        self.result_list.append({
+        result_dict = {
             "url": item['url'],
             "img_url": item['img_url']
-        })
+        }
+        print(result_dict)
+        self.result_list.append(result_dict)
         with open('./result.json', 'w') as f:
             f.write(json.dumps(self.result_list, ensure_ascii=False))
         return item

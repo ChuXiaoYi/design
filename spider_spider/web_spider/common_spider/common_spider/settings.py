@@ -15,7 +15,7 @@ SPIDER_MODULES = ['common_spider.spiders']
 NEWSPIDER_MODULE = 'common_spider.spiders'
 
 # 日志
-LOG_FILE = "mySpider.log"
+LOG_FILE = "../../log_spider/mySpider.log"
 LOG_LEVEL = "DEBUG"
 LOG_STDOUT = "True"
 

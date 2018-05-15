@@ -1,16 +1,13 @@
 import pika
 import json
-
+import time
+import subprocess
+from spider_spider.local_spider.watch_dog import FileEventHandler
+from watchdog.observers import Observer
 
 connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
 channel = connection.channel()
 channel.queue_declare(queue='rpc_queue')
-
-map_dict = {
-  0: "database_spider",
-  1: "local_spider",
-  2: "web_spider"
-}
 
 def spider_rabbit(data):
     """
@@ -22,16 +19,33 @@ def spider_rabbit(data):
     json_map = data.decode('utf8')
     try:
         dict_map = json.loads(json_map)
-    except Exception as e :
+    except Exception as e:
         pass
     else:
-        for v in dict_map.values():
-            print(v)
-            result = map_dict.get(v, 0)
-            if result == 0:
-                spider_result = "木有该请求"
-            else:
-                spider_result= "我请求的是的" + str(result)
+        if dict_map.get('num') == 1:
+            watch_file = dict_map['watch_file']
+            observer = Observer()
+            event_handler = FileEventHandler()
+            observer.schedule(event_handler,
+                              watch_file,
+                              True)
+            observer.start()
+            try:
+                while True:
+                    time.sleep(1)
+            except KeyboardInterrupt:
+                observer.stop()
+        elif dict_map.get('num') == 2:
+            url = "http://" + dict_map['web_url']
+            param = "-".join([dict_map['deep'],url])
+            print(param)
+            subprocess.Popen(args='./spider.sh {param}'.format(param=param),
+                                 shell=True,
+                                 stdin=None,
+                                 stdout=None,
+                                 universal_newlines=True)
+
+            spider_result = "爬取完成"
             return spider_result
 
 def on_request(ch, method, props, body):
@@ -58,8 +72,3 @@ def on_request(ch, method, props, body):
 channel.basic_consume(on_request, queue='rpc_queue')
 print(" waiting rpc requests..... ")
 channel.start_consuming()
-
-
-
-
-
