@@ -14,7 +14,7 @@
     -database_spider:
 
     -local_spider:
-
+        · 本地文件监控——watchdog
     -web_spider:
-
+        · 网络采集——scrapy
     -log_spider
