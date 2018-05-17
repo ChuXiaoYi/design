@@ -15,9 +15,23 @@ SPIDER_MODULES = ['common_spider.spiders']
 NEWSPIDER_MODULE = 'common_spider.spiders'
 
 # 日志
-LOG_FILE = "../../log_spider/mySpider.log"
-LOG_LEVEL = "DEBUG"
-LOG_STDOUT = "True"
+# LOG_FILE = "../../log_spider/mySpider.log"
+# LOG_LEVEL = "DEBUG"
+# LOG_STDOUT = "True"
+# ===========================
+# 图片
+IMAGES_STORE = '/Users/chuxiaoyi/python/练习/code/毕设/design/image'
+# 90天的图片失效期限
+IMAGES_EXPIRES = 90
+# 略缩图
+IMAGES_THUMBS = {
+    'small': (50, 50),
+    'big': (270, 270),
+}
+# 滤出小图片
+IMAGES_MIN_HEIGHT = 110
+IMAGES_MIN_WIDTH = 110
+
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent

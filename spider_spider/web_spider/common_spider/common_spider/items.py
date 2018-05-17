@@ -10,8 +10,10 @@ import scrapy
 
 class CommonSpiderItem(scrapy.Item):
     # define the fields for your item here like:
-    # name = scrapy.Field()
+    # name = scrapy.Field()R
     # 图片url
-    img_url = scrapy.Field()
-    # 图片所属页面的url
-    url = scrapy.Field()
+    image_urls = scrapy.Field()
+    # 图片
+    images = scrapy.Field()
+    # 图片保存路径
+    image_paths = scrapy.Field()

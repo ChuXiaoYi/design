@@ -1,22 +1,23 @@
 # -*- coding: utf-8 -*-
 import json
-# Define your item pipelines here
-#
-# Don't forget to add your pipeline to the ITEM_PIPELINES setting
-# See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
+from scrapy.contrib.pipeline.images import ImagesPipeline,DropItem
+import scrapy
 
 
-class CommonSpiderPipeline(object):
-    def __init__(self):
-        self.result_list = list()
+class CommonSpiderPipeline(ImagesPipeline):
+    def get_media_requests(self, item, info):
+        """
+        对图片url进行下载
+        :param item:
+        :param info:
+        :return:
+        """
+        for image_url in item['image_urls']:
+            yield scrapy.Request(image_url)
 
-    def process_item(self, item, spider):
-        result_dict = {
-            "url": item['url'],
-            "img_url": item['img_url']
-        }
-        print(result_dict)
-        self.result_list.append(result_dict)
-        with open('./result.json', 'w') as f:
-            f.write(json.dumps(self.result_list, ensure_ascii=False))
+    def item_completed(self, results, item, info):
+        image_paths = [x['path'] for ok, x in results if ok]
+        if not image_paths:
+            raise DropItem("没有图片")
+        item['image_paths'] = image_paths
         return item

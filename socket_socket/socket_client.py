@@ -19,11 +19,21 @@ def choose_spider(num):
     elif num == 2:
         web_url = input("请输入要抓取的网址: ")
         deep = input("请输入抓取深度: ")
-        data_dict = dict(
-            num=num,
-            web_url=web_url,
-            deep=deep
-        )
+        is_download = input("是否要下载图片（yes/no）:")
+        if is_download == 'yes':
+            image_path = input("请输入下载路径:")
+            data_dict = dict(
+                num=num,
+                web_url=web_url,
+                deep=deep,
+                image_path=image_path
+            )
+        else:
+            data_dict = dict(
+                num=num,
+                web_url=web_url,
+                deep=deep
+            )
     elif num == 3:
         pass
     else:

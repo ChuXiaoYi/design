@@ -21,17 +21,9 @@ class CommonSpider(scrapy.Spider):
         imgs = response.xpath('//img[contains(@src, ".jpg")]/@src').extract()
         # 页面全部url
         all_url = response.xpath('//body//a[contains(@href, "http")]/@href').extract()
-        if imgs != []:
-            for img in imgs:
-                item = CommonSpiderItem()
-                item['img_url'] = img
-                item['url'] = response.request._url
-                yield item
-        else:
-            item = CommonSpiderItem()
-            item['img_url'] = ""
-            item['url'] = response.request._url
-            yield item
+        item = CommonSpiderItem()
+        item['image_urls'] = imgs
+        yield item
         print(response.request.meta['depth'])
         if response.request.meta['depth']+1 < int(self.deep_num):
             print(self.deep_num)
