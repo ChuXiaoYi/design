@@ -42,7 +42,14 @@ def choose_spider(num):
                 deep=deep
             )
     elif num == 3:
-        pass
+        # search_spider
+        file = input('请输入检索文件夹路径：')
+        key_word = input('请输入关键词：')
+        data_dict = dict(
+            num=num,
+            file=file,
+            key_word=key_word
+        )
     else:
         pass
     data = json.dumps(data_dict, ensure_ascii=False)
@@ -91,5 +98,5 @@ if __name__ == '__main__':
                     "\t0: ssh_log_spider\n"
                     "\t1: monitor_spider\n"
                     "\t2: web_spider\n"
-                    "\t3: log_spider\n")
+                    "\t3: search_spider\n")
         main(num)

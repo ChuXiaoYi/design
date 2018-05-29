@@ -6,9 +6,12 @@ import subprocess
 from spider_spider.monitor_spider.watch_dog import FileEventHandler
 from watchdog.observers import Observer
 
+from spider_spider.search_spider.whoosh_search import chinese_analyzer
+
 connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
 channel = connection.channel()
 channel.queue_declare(queue='rpc_queue')
+
 
 def spider_rabbit(data):
     """
@@ -23,6 +26,7 @@ def spider_rabbit(data):
     except Exception as e:
         pass
     else:
+        # 远程服务器日志获取
         if dict_map.get('num') == 0:
             p = subprocess.Popen(args='python3 ../spider_spider/ssh_log_spider/shell.py',
                                  shell=True,
@@ -32,6 +36,7 @@ def spider_rabbit(data):
             p.wait()
             spider_result = "远程日志获取完成"
             return spider_result
+        # 文件监控并发送报警邮件
         elif dict_map.get('num') == 1:
             watch_file = dict_map['watch_file']
             observer = Observer()
@@ -45,6 +50,7 @@ def spider_rabbit(data):
                     time.sleep(1)
             except KeyboardInterrupt:
                 observer.stop()
+        # 图片采集
         elif dict_map.get('num') == 2:
             url = "http://" + dict_map['web_url']
             param = "-".join([dict_map['deep'], url])
@@ -60,6 +66,14 @@ def spider_rabbit(data):
                                  universal_newlines=True)
             p.wait()
             spider_result = "爬取完成"
+            return spider_result
+        # 全文检索
+        elif dict_map.get('num') == 3:
+            file = dict_map['file']
+            key_word = dict_map['key_word']
+            wh = chinese_analyzer()
+            wh.create_index('/Users/chuxiaoyi/python/练习/code/毕设/design/image')
+            spider_result = wh.search('褚晓逸')
             return spider_result
 
 def on_request(ch, method, props, body):
