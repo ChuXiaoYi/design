@@ -1,0 +1,92 @@
+[
+  {
+    "count": {
+      "0": 5,
+      "29": 10,
+      "22": 1
+    },
+    "data": "agodaHotel-20180521",
+    "log_list": [
+      {
+        "content": "https://www.agoda.com/zh-cn/hampton-inn-new-york-empire-state-building/hotel/new-york-ny-us.html&3&20180526",
+        "source": "agodaHotel",
+        "code": "29"
+      },
+      {
+        "content": "https://www.agoda.com/zh-cn/al-viminale-hill-inn-hotel/hotel/rome-it.html&4&20180606",
+        "source": "agodaHotel",
+        "code": "29"
+      },
+      {
+        "content": "https://www.agoda.com/zh-cn/holiday-inn-paris-gare-de-lyon-bastille/hotel/paris-fr.html&4&20180529",
+        "source": "agodaHotel",
+        "code": "22"
+      },
+      {
+        "content": "https://www.agoda.com/zh-cn/hotel-de-lille-louvre/hotel/paris-fr.html&2&20180711",
+        "source": "agodaHotel",
+        "code": "0"
+      },
+      {
+        "content": "https://www.agoda.com/zh-cn/holiday-inn-manhattan-6th-ave-chelsea/hotel/new-york-ny-us.html&3&20180601",
+        "source": "agodaHotel",
+        "code": "0"
+      },
+      {
+        "content": "https://www.agoda.com/zh-cn/holiday-inn-paris-gare-de-lyon-bastille/hotel/paris-fr.html&2&20180524",
+        "source": "agodaHotel",
+        "code": "29"
+      },
+      {
+        "content": "https://www.agoda.com/zh-cn/the-bowery-house-hotel/hotel/new-york-ny-us.html&5&20180701",
+        "source": "agodaHotel",
+        "code": "0"
+      },
+      {
+        "content": "https://www.agoda.com/zh-cn/grand-mercure-auckland/hotel/auckland-nz.html&1&20180816",
+        "source": "agodaHotel",
+        "code": "0"
+      },
+      {
+        "content": "https://www.agoda.com/zh-cn/hotel-dupond-smith/hotel/paris-fr.html&2&20180531",
+        "source": "agodaHotel",
+        "code": "29"
+      },
+      {
+        "content": "https://www.agoda.com/zh-cn/apartments-in-saint-germain-des-pres/hotel/paris-fr.html&2&20180531",
+        "source": "agodaHotel",
+        "code": "29"
+      },
+      {
+        "content": "https://www.agoda.com/zh-cn/best-western-premier-opera-faubourg/hotel/paris-fr.html&4&20180802",
+        "source": "agodaHotel",
+        "code": "0"
+      },
+      {
+        "content": "https://www.agoda.com/zh-cn/hotel-bellclassic-tokyo/hotel/tokyo-jp.html&3&20180530\", \"callback_type\": \"scv101\", \"norm_hotel_infomation\": {\"private_hid\": \"ht11979146\", \"room_type_md5\": \"\", \"cid\": \"20071\", \"checkin\": \"20180530\", \"days\": 3, \"room_type\": \"\\u53cc\\u4eba\\u95f4\", \"num\": 1, \"hid\": \"ht11979146\", \"occ\": 2, \"ori_room\": \"\", \"checkout\": \"20180602\", \"need_match_md5\": 0}, \"tid\": \"lyue9lpt5af429e5d2fd6e9xid12i5ij\", \"ticket_redis_lock_key\": \"hotel_1526883088352_1013fde9f12a22109ad5fe51f5f2a4cc_lock\", \"ticket_md5\": \"1013fde9f12a22109ad5fe51f5f2a4cc\", \"data_type\": \"hotel\", \"api_acc\": 1, \"hid\": \"ht11979146\", \"machine_ip\": \"10.10.234.200\", \"journey_redis_lock_key\": \"journey_1526883088352_a3043cda67456e798a29dfd7d4a04041_1526883098346_lock\", \"cache_key\": \"hotel_cache|ht11979146|3|20180530|2|agoda\", \"machine_port\": 8089}, \"proxy_info\": {}, \"redis_key\": \"hotel|ht11979146|agoda|20180530|3|1526883088352|10.10.234.200|8089|0\", \"content\": \"https://www.agoda.com/zh-cn/hotel-bellclassic-tokyo/hotel/tokyo-jp.html&3&20180530",
+        "source": "agodaHotel",
+        "code": "29"
+      },
+      {
+        "content": "https://www.agoda.com/zh-cn/3-bedroom-double-waterfront-luxury-apartment_2/hotel/auckland-nz.html&1&20180816",
+        "source": "agodaHotel",
+        "code": "29"
+      },
+      {
+        "content": "https://www.agoda.com/zh-cn/skycity-hotel/hotel/auckland-nz.html&2&20180822",
+        "source": "agodaHotel",
+        "code": "29"
+      },
+      {
+        "content": "https://www.agoda.com/zh-cn/3-bedroom-double-waterfront-luxury-apartment_2/hotel/auckland-nz.html&1&20180815",
+        "source": "agodaHotel",
+        "code": "29"
+      },
+      {
+        "content": "https://www.agoda.com/zh-cn/skycity-hotel/hotel/auckland-nz.html&2&20180821",
+        "source": "agodaHotel",
+        "code": "29"
+      }
+    ]
+  }
+]
