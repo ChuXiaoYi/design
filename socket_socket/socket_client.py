@@ -1,6 +1,8 @@
+# -*- coding: utf-8 -*-
 import socket
 import time
 import json
+
 
 def choose_spider(num):
     """
@@ -9,14 +11,19 @@ def choose_spider(num):
     """
     global data_dict
     if num == 0:
-        pass
+        # ssh_log_spider
+        data_dict = dict(
+            num=num
+        )
     elif num == 1:
+        # monitor_spider
         watch_file = input("请输入要监控的文件路径：")
         data_dict = dict(
             num=num,
             watch_file=watch_file
         )
     elif num == 2:
+        # web_spider
         web_url = input("请输入要抓取的网址: ")
         deep = input("请输入抓取深度: ")
         is_download = input("是否要下载图片（yes/no）:")
@@ -41,6 +48,7 @@ def choose_spider(num):
     data = json.dumps(data_dict, ensure_ascii=False)
     return data
 
+
 def main(num):
     """
     主程序
@@ -61,12 +69,27 @@ def main(num):
         client_socket.close()
 
 
+def login():
+    """
+    用户登陆
+    :return:
+    """
+    while True:
+        username = input('请输入用户名：')
+        password = int(input('请输入密码：'))
+        if username != 'cxy' or password != 123:
+            print('用户名或密码错误，请重新输入。。')
+        else:
+            print('登陆成功。。。')
+            break
+
 
 if __name__ == '__main__':
+    login()
     while True:
         num = input("输入你想请求的spider：\n"
-                    "\t0: database_spider\n"
-                    "\t1: local_spider\n"
+                    "\t0: ssh_log_spider\n"
+                    "\t1: monitor_spider\n"
                     "\t2: web_spider\n"
                     "\t3: log_spider\n")
         main(num)

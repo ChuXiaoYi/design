@@ -15,7 +15,6 @@ class CommonSpider(scrapy.Spider):
         self.start_urls = [target.split("-")[1]]
         self.allowed_domains = [target.split("-")[1].split(".", 1)[1].split('/')[0]]
 
-
     def parse(self, response):
         # 页面全部图片链接
         imgs = response.xpath('//img[contains(@src, ".jpg")]/@src').extract()
@@ -25,12 +24,9 @@ class CommonSpider(scrapy.Spider):
         item['image_urls'] = imgs
         yield item
         print(response.request.meta['depth'])
-        if response.request.meta['depth']+1 < int(self.deep_num):
+        if response.request.meta['depth'] + 1 < int(self.deep_num):
             print(self.deep_num)
             for url in all_url:
                 if url.find(r'.com') > 0 or url.find(r'.cn') > 0:
                     print(url)
                     yield scrapy.Request(url=url, callback=self.parse)
-
-
-

@@ -1,8 +1,9 @@
+# -*- coding: utf-8 -*-
 import pika
 import json
 import time
 import subprocess
-from spider_spider.local_spider.watch_dog import FileEventHandler
+from spider_spider.monitor_spider.watch_dog import FileEventHandler
 from watchdog.observers import Observer
 
 connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
@@ -22,7 +23,16 @@ def spider_rabbit(data):
     except Exception as e:
         pass
     else:
-        if dict_map.get('num') == 1:
+        if dict_map.get('num') == 0:
+            p = subprocess.Popen(args='python3 ../spider_spider/ssh_log_spider/shell.py',
+                                 shell=True,
+                                 stdin=None,
+                                 stdout=None,
+                                 universal_newlines=True)
+            p.wait()
+            spider_result = "远程日志获取完成"
+            return spider_result
+        elif dict_map.get('num') == 1:
             watch_file = dict_map['watch_file']
             observer = Observer()
             event_handler = FileEventHandler()
@@ -37,14 +47,18 @@ def spider_rabbit(data):
                 observer.stop()
         elif dict_map.get('num') == 2:
             url = "http://" + dict_map['web_url']
-            param = "-".join([dict_map['deep'],url])
-            print(param)
-            subprocess.Popen(args='./spider.sh {param}'.format(param=param),
+            param = "-".join([dict_map['deep'], url])
+            if dict_map.get('image_path', '') != '':
+                image_store = dict_map.get('image_path', '')
+
+            else:
+                image_store = ''
+            p = subprocess.Popen(args='./spider.sh {param} {image_store}'.format(param=param, image_store=image_store),
                                  shell=True,
                                  stdin=None,
                                  stdout=None,
                                  universal_newlines=True)
-
+            p.wait()
             spider_result = "爬取完成"
             return spider_result
 
