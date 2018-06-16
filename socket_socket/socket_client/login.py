@@ -8,52 +8,48 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-
-class Ui_Form(object):
-    def setupUi(self, Form):
-        Form.setObjectName("Form")
-        Form.resize(400, 300)
-        self.label = QtWidgets.QLabel(Form)
-        self.label.setGeometry(QtCore.QRect(80, 60, 60, 16))
-        self.label.setObjectName("label")
-        self.label_2 = QtWidgets.QLabel(Form)
-        self.label_2.setGeometry(QtCore.QRect(80, 110, 60, 16))
+class Ui_MainWindow(object):
+    def setupUi(self, MainWindow):
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.resize(524, 381)
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setObjectName("centralwidget")
+        self.formLayout = QtWidgets.QFormLayout(self.centralwidget)
+        self.formLayout.setObjectName("formLayout")
+        self.label_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_2.setObjectName("label_2")
-        self.pushButton = QtWidgets.QPushButton(Form)
-        self.pushButton.setGeometry(QtCore.QRect(60, 230, 113, 32))
-        self.pushButton.setObjectName("pushButton")
-        self.pushButton_2 = QtWidgets.QPushButton(Form)
-        self.pushButton_2.setGeometry(QtCore.QRect(210, 230, 113, 32))
-        self.pushButton_2.setObjectName("pushButton_2")
-        self.checkBox = QtWidgets.QCheckBox(Form)
-        self.checkBox.setGeometry(QtCore.QRect(90, 170, 191, 20))
-        self.checkBox.setObjectName("checkBox")
-        self.lineEdit = QtWidgets.QLineEdit(Form)
-        self.lineEdit.setGeometry(QtCore.QRect(150, 50, 113, 21))
-        self.lineEdit.setObjectName("lineEdit")
-        self.lineEdit_2 = QtWidgets.QLineEdit(Form)
-        self.lineEdit_2.setGeometry(QtCore.QRect(150, 110, 113, 21))
-        self.lineEdit_2.setObjectName("lineEdit_2")
+        self.formLayout.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.label_2)
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setObjectName("label")
+        self.formLayout.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.label)
+        self.username = QtWidgets.QLineEdit(self.centralwidget)
+        self.username.setText("")
+        self.username.setObjectName("username")
+        self.formLayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.username)
+        self.password = QtWidgets.QLineEdit(self.centralwidget)
+        self.password.setText("")
+        self.password.setObjectName("password")
+        self.formLayout.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.password)
+        self.login_button = QtWidgets.QPushButton(self.centralwidget)
+        self.login_button.setObjectName("login_button")
+        self.formLayout.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.login_button)
+        MainWindow.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(MainWindow)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 524, 22))
+        self.menubar.setObjectName("menubar")
+        MainWindow.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(MainWindow)
+        self.statusbar.setObjectName("statusbar")
+        MainWindow.setStatusBar(self.statusbar)
 
-        self.retranslateUi(Form)
-        QtCore.QMetaObject.connectSlotsByName(Form)
+        self.retranslateUi(MainWindow)
+        self.login_button.clicked.connect(MainWindow.btn_click)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-    def retranslateUi(self, Form):
+    def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "基于socket的数据采集服务器"))
-        self.label.setText(_translate("Form", "用户名"))
-        self.label_2.setText(_translate("Form", "密码"))
-        self.pushButton.setText(_translate("Form", "重置"))
-        self.pushButton_2.setText(_translate("Form", "登陆"))
-        self.checkBox.setText(_translate("Form", "记住用户名或密码"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.label_2.setText(_translate("MainWindow", "密码："))
+        self.label.setText(_translate("MainWindow", "用户名："))
+        self.login_button.setText(_translate("MainWindow", "登陆"))
 
-
-if __name__ == '__main__':
-    import sys
-
-    app = QtWidgets.QApplication(sys.argv)
-    widget = QtWidgets.QWidget()
-    ui = Ui_Form()
-    ui.setupUi(widget)
-    widget.show()
-    sys.exit(app.exec_())

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>meun</class>
+ <widget class="QWidget" name="meun">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>菜单栏</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QPushButton" name="ssh_spider">
+     <property name="text">
+      <string>远程日志采集</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="web_spider">
+     <property name="text">
+      <string>图片采集</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="monitor_spider">
+     <property name="text">
+      <string>文件监控</string>
+     </property>
+     <property name="autoDefault">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="search_spider">
+     <property name="text">
+      <string>全文检索</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>ssh_spider</sender>
+   <signal>clicked()</signal>
+   <receiver>meun</receiver>
+   <slot>start_ssh_spider()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>173</x>
+     <y>59</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>229</x>
+     <y>-112</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>web_spider</sender>
+   <signal>clicked()</signal>
+   <receiver>meun</receiver>
+   <slot>start_web_spider()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>221</x>
+     <y>130</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>262</x>
+     <y>-74</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>monitor_spider</sender>
+   <signal>clicked()</signal>
+   <receiver>meun</receiver>
+   <slot>start_monitor_spider()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>260</x>
+     <y>175</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>246</x>
+     <y>-90</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>search_spider</sender>
+   <signal>clicked()</signal>
+   <receiver>meun</receiver>
+   <slot>start_search_spider()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>293</x>
+     <y>253</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>288</x>
+     <y>-25</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>start_ssh_spider()</slot>
+  <slot>start_web_spider()</slot>
+  <slot>start_monitor_spider()</slot>
+  <slot>start_search_spider()</slot>
+ </slots>
+</ui>

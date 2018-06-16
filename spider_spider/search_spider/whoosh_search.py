@@ -86,4 +86,4 @@ def chinese_analyzer():
 if __name__ == '__main__':
     wh = chinese_analyzer()
     wh.create_index('/Users/chuxiaoyi/python/练习/code/毕设/design/image')
-    print(wh.search('褚晓逸'))
+    print(wh.search('内容'))

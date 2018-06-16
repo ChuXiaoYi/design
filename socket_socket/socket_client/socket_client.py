@@ -4,7 +4,7 @@ import time
 import json
 
 
-def choose_spider(num):
+def choose_spider(num, kwargs):
     """
     判断要执行哪个爬虫
     :return:
@@ -24,11 +24,11 @@ def choose_spider(num):
         )
     elif num == 2:
         # web_spider
-        web_url = input("请输入要抓取的网址: ")
-        deep = input("请输入抓取深度: ")
-        is_download = input("是否要下载图片（yes/no）:")
+        web_url = kwargs['web_url']
+        deep = kwargs['deep']
+        is_download = kwargs['is_download']
         if is_download == 'yes':
-            image_path = input("请输入下载路径:")
+            image_path = kwargs['image_path']
             data_dict = dict(
                 num=num,
                 web_url=web_url,
@@ -56,7 +56,7 @@ def choose_spider(num):
     return data
 
 
-def main(num):
+def main(num, info):
     """
     主程序
     :param num:
@@ -66,7 +66,8 @@ def main(num):
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     print("正在连接%s，端口号为%s" % server_address)
     client_socket.connect(server_address)
-    data = choose_spider(int(num))
+    data = choose_spider(int(num), info)
+    print(data)
     client_socket.sendall(data.encode('utf8'))
     result = client_socket.recv(65535)
     print("%s received %s" % (client_socket.getsockname(), result.decode('utf8')))
@@ -74,6 +75,7 @@ def main(num):
         print('closeingsocket', client_socket.getsockname())
         time.sleep(1)
         client_socket.close()
+    return result
 
 
 def login():
@@ -100,3 +102,4 @@ if __name__ == '__main__':
                     "\t2: web_spider\n"
                     "\t3: search_spider\n")
         main(num)
+
